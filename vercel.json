@@ -1,0 +1,12 @@
+{
+  "crons": [
+    {
+      "path": "/api/scores/refresh",
+      "schedule": "*/5 * 9-12 4 *"
+    },
+    {
+      "path": "/api/lock/autoselect-all",
+      "schedule": "0 14 11 4 *"
+    }
+  ]
+}

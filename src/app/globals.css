@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --masters-green: #1a5c38;
+    --masters-green-dark: #0f3d24;
+    --masters-green-light: #2d7a4f;
+    --masters-yellow: #f0c04e;
+    --masters-yellow-light: #f7d98a;
+    --masters-cream: #fdf6e3;
+    --masters-white: #ffffff;
+  }
+
+  body {
+    @apply antialiased;
+    background-color: #0a1f13;
+    color: #f0ede6;
+    font-family: 'Georgia', 'Times New Roman', serif;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Georgia', 'Times New Roman', serif;
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Augusta watermark background rotator */
+.augusta-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.augusta-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(10,31,19,0.92) 0%, rgba(15,61,36,0.88) 50%, rgba(10,31,19,0.92) 100%);
+  z-index: 1;
+}
+
+.augusta-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+  z-index: 0;
+}
+
+.augusta-slide.active {
+  opacity: 0.18;
+}
+
+/* SVG-based Augusta landmark illustrations as data URIs */
+.slide-1 { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect fill='%230f3d24' width='1200' height='800'/%3E%3C!-- Amen Corner Hole 12 bridge scene --%3E%3Cellipse cx='600' cy='750' rx='800' ry='120' fill='%231a5c38' opacity='0.6'/%3E%3Crect x='350' y='580' width='500' height='180' rx='4' fill='%23236b40' opacity='0.5'/%3E%3Cellipse cx='600' cy='620' rx='220' ry='40' fill='%2300a550' opacity='0.3'/%3E%3Crect x='480' y='560' width='240' height='12' rx='6' fill='%23d4af37' opacity='0.8'/%3E%3Crect x='480' y='540' width='12' height='30' fill='%23d4af37' opacity='0.8'/%3E%3Crect x='708' y='540' width='12' height='30' fill='%23d4af37' opacity='0.8'/%3E%3Cpath d='M200 620 Q600 520 1000 620' stroke='%2300a550' stroke-width='3' fill='none' opacity='0.4'/%3E%3Ccircle cx='600' cy='480' r='180' fill='none' stroke='%23d4af37' stroke-width='1' opacity='0.15'/%3E%3Ctext x='600' y='360' text-anchor='middle' fill='%23d4af37' font-size='28' opacity='0.3' font-family='Georgia'%3EAmen Corner%3C/text%3E%3C/svg%3E"); }
+
+.slide-2 { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect fill='%230f3d24' width='1200' height='800'/%3E%3C!-- Clubhouse --%3E%3Crect x='300' y='300' width='600' height='320' fill='%23f5f0e8' opacity='0.12'/%3E%3Crect x='280' y='260' width='640' height='50' fill='%23f5f0e8' opacity='0.1'/%3E%3Cpolygon points='600,180 250,270 950,270' fill='%23f5f0e8' opacity='0.1'/%3E%3Crect x='380' y='460' width='80' height='160' fill='%23c8b882' opacity='0.12'/%3E%3Crect x='540' y='420' width='120' height='200' fill='%23c8b882' opacity='0.1'/%3E%3Crect x='740' y='460' width='80' height='160' fill='%23c8b882' opacity='0.12'/%3E%3Cellipse cx='600' cy='660' rx='500' ry='60' fill='%231a5c38' opacity='0.5'/%3E%3Ctext x='600' y='240' text-anchor='middle' fill='%23d4af37' font-size='26' opacity='0.3' font-family='Georgia'%3EAugusta National%3C/text%3E%3C/svg%3E"); }
+
+.slide-3 { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect fill='%230a1f13' width='1200' height='800'/%3E%3C!-- Flowering azaleas --%3E%3Ccircle cx='150' cy='700' r='120' fill='%23cc3366' opacity='0.08'/%3E%3Ccircle cx='200' cy='680' r='90' fill='%23dd4477' opacity='0.07'/%3E%3Ccircle cx='1050' cy='700' r='130' fill='%23cc3366' opacity='0.08'/%3E%3Ccircle cx='1000' cy='680' r='100' fill='%23dd4477' opacity='0.07'/%3E%3Ccircle cx='600' cy='720' r='150' fill='%23cc3355' opacity='0.06'/%3E%3Cpath d='M0 650 Q300 580 600 600 Q900 620 1200 580 L1200 800 L0 800Z' fill='%231a5c38' opacity='0.6'/%3E%3Cpath d='M0 700 Q400 650 700 670 Q900 680 1200 640 L1200 800 L0 800Z' fill='%230f3d24' opacity='0.8'/%3E%3Ccircle cx='600' cy='320' r='8' fill='%23d4af37' opacity='0.6'/%3E%3Cpath d='M560 328 L640 328' stroke='%23d4af37' stroke-width='2' opacity='0.4'/%3E%3Ctext x='600' y='280' text-anchor='middle' fill='%23d4af37' font-size='22' opacity='0.25' font-family='Georgia'%3EThe Masters%3C/text%3E%3C/svg%3E"); }
+
+.slide-4 { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 800'%3E%3Crect fill='%230a1f13' width='1200' height='800'/%3E%3C!-- Green jacket --%3E%3Cellipse cx='600' cy='500' rx='180' ry='240' fill='%231a5c38' opacity='0.15'/%3E%3Cpath d='M440 320 Q600 280 760 320 L780 600 Q600 640 420 600Z' fill='%231a5c38' opacity='0.12'/%3E%3Cpath d='M420 340 Q480 320 520 360 L510 500 Q460 520 410 500Z' fill='%231a5c38' opacity='0.1'/%3E%3Cpath d='M780 340 Q720 320 680 360 L690 500 Q740 520 790 500Z' fill='%231a5c38' opacity='0.1'/%3E%3Ccircle cx='600' cy='200' r='140' fill='none' stroke='%23d4af37' stroke-width='60' opacity='0.04'/%3E%3Ctext x='600' y='195' text-anchor='middle' fill='%23d4af37' font-size='48' opacity='0.12' font-family='Georgia'%3EMASTERS%3C/text%3E%3Ctext x='600' y='245' text-anchor='middle' fill='%23d4af37' font-size='22' opacity='0.1' font-family='Georgia'%3E2026%3C/text%3E%3C/svg%3E"); }
+
+@layer components {
+  .btn-primary {
+    @apply font-semibold py-2 px-4 rounded transition-all disabled:opacity-50 disabled:cursor-not-allowed;
+    background-color: var(--masters-green);
+    color: white;
+    border: 1px solid var(--masters-green-light);
+  }
+  .btn-primary:hover:not(:disabled) {
+    background-color: var(--masters-green-light);
+  }
+
+  .btn-secondary {
+    @apply font-semibold py-2 px-4 rounded transition-all;
+    background-color: rgba(255,255,255,0.08);
+    color: #d4c9b0;
+    border: 1px solid rgba(255,255,255,0.15);
+  }
+  .btn-secondary:hover {
+    background-color: rgba(255,255,255,0.14);
+  }
+
+  .btn-gold {
+    @apply font-semibold py-2 px-4 rounded transition-all;
+    background-color: var(--masters-yellow);
+    color: #1a1a1a;
+  }
+  .btn-gold:hover {
+    background-color: var(--masters-yellow-light);
+  }
+
+  .card {
+    @apply rounded-xl p-5;
+    background-color: rgba(15, 61, 36, 0.55);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    backdrop-filter: blur(8px);
+  }
+
+  .card-dark {
+    @apply rounded-xl p-5;
+    background-color: rgba(8, 24, 14, 0.75);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    backdrop-filter: blur(8px);
+  }
+
+  .input {
+    @apply rounded px-3 py-2 w-full focus:outline-none transition-colors;
+    background-color: rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    color: #f0ede6;
+  }
+  .input::placeholder { color: rgba(240, 237, 230, 0.35); }
+  .input:focus { border-color: rgba(212, 175, 55, 0.6); }
+
+  .badge-green {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+    background-color: rgba(26, 92, 56, 0.7);
+    color: #86efac;
+    border: 1px solid rgba(134, 239, 172, 0.3);
+  }
+
+  .badge-red {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+    background-color: rgba(127, 29, 29, 0.6);
+    color: #fca5a5;
+    border: 1px solid rgba(252, 165, 165, 0.3);
+  }
+
+  .badge-yellow {
+    @apply inline-flex items-center px-2 py-0.5 rounded text-xs font-medium;
+    background-color: rgba(120, 90, 10, 0.6);
+    color: var(--masters-yellow-light);
+    border: 1px solid rgba(240, 192, 78, 0.3);
+  }
+
+  .page-wrapper {
+    @apply relative min-h-screen;
+    z-index: 1;
+  }
+}

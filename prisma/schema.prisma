@@ -1,0 +1,99 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+model User {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String
+  passwordHash  String
+  createdAt     DateTime @default(now())
+
+  leagueMemberships LeagueMember[]
+  golferPicks       GolferPick[]
+  finalPicks        FinalPick[]
+}
+
+model League {
+  id         String   @id @default(cuid())
+  name       String
+  inviteCode String   @unique
+  ownerId    String
+  createdAt  DateTime @default(now())
+
+  members LeagueMember[]
+}
+
+model LeagueMember {
+  id       String   @id @default(cuid())
+  userId   String
+  leagueId String
+  joinedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  league League @relation(fields: [leagueId], references: [id])
+
+  @@unique([userId, leagueId])
+}
+
+model Golfer {
+  id        String  @id // ESPN athlete ID or "masters-N"
+  name      String
+  country   String?
+  worldRank Int?
+  odds      Int?    // win odds as integer e.g. 550 = +550
+  oddsRank  Int?    // sort order by odds (1 = favorite)
+  imageUrl  String?
+  isMadeCut Boolean @default(true)
+
+  picks      GolferPick[]
+  finalPicks FinalPick[]
+  scores     TournamentScore[]
+}
+
+model GolferPick {
+  id       String   @id @default(cuid())
+  userId   String
+  leagueId String
+  golferId String
+  pickedAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id])
+  golfer Golfer @relation(fields: [golferId], references: [id])
+
+  @@unique([userId, leagueId, golferId])
+}
+
+model FinalPick {
+  id           String   @id @default(cuid())
+  userId       String
+  leagueId     String
+  golferId     String
+  lockedAt     DateTime @default(now())
+  autoSelected Boolean  @default(false)
+
+  user   User   @relation(fields: [userId], references: [id])
+  golfer Golfer @relation(fields: [golferId], references: [id])
+
+  @@unique([userId, leagueId, golferId])
+}
+
+model TournamentScore {
+  id         String   @id @default(cuid())
+  golferId   String
+  round      Int // 1-4
+  strokes    Int?
+  scoreToPar Int?
+  position   String? // "T3", "1", "CUT", etc.
+  updatedAt  DateTime @updatedAt
+
+  golfer Golfer @relation(fields: [golferId], references: [id])
+
+  @@unique([golferId, round])
+}
